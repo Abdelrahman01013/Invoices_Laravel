@@ -31,6 +31,8 @@
             @include('layouts.footer')
             @include('layouts.footer-scripts')
 
+            <script src="{{ URL::asset('assets/js/modal.js') }}"></script>
+
 
 
 
@@ -64,5 +66,5 @@
     setInterval(function() {
         $("#count").load(window.location.href + " #count");
         $("#notif").load(window.location.href + " #notif");
-    }, 5000);
+    }, 10000);
 </script>

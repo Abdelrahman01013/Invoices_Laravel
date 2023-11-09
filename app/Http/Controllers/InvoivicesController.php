@@ -58,6 +58,13 @@ class InvoivicesController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate([
+            'invoice_number' => 'required | unique:invoivices'
+        ], [
+            'invoice_number.required' => 'يجب ادخال رقم الفاتوره',
+            'invoice_number.unique' => 'هذه الفاتوره موجوده من قبل ',
+
+        ]);
 
 
         Invoivices::create([
@@ -86,6 +93,7 @@ class InvoivicesController extends Controller
             'Status' => 'غير مدفوعة',
             'Value_Status' => 2,
             'note' => $request->note,
+            'total' => $request->Amount_collection,
             'user' => (auth()->user()->name),
         ]);
 
@@ -113,9 +121,12 @@ class InvoivicesController extends Controller
         $inv_id = Invoivices::latest()->first()->id;
         $user = User::where('id', '!=', auth()->user()->id)->get();
 
+        $title = "تم اصافه فاتوره برقم";
+
+        Notification::send($user, new Add_invoices_not($inv_id, $title));
         // $user->notify(new AddInvoices($request->invoice_id));
         Notification::send($user, new AddInvoices($inv_id));
-        Notification::send($user, new Add_invoices_not($inv_id));
+
 
 
 
@@ -184,6 +195,7 @@ class InvoivicesController extends Controller
             'product' => $request->product,
             'Section' => $request->Section,
             'note' => $request->note,
+            'totla' => $request->Amount_collection
 
 
         ]);
@@ -199,6 +211,13 @@ class InvoivicesController extends Controller
         $newPath = public_path('Attachments/' . $request->invoice_number);
 
         File::moveDirectory($oldPath, $newPath);
+
+        $user = User::where('id', '!=', auth()->user()->id)->get();
+
+        $inv_id = $request->invoice_id;
+        $title = "تم التعديل علي الفاتوره رقم";
+
+        Notification::send($user, new Add_invoices_not($inv_id, $title));
 
 
         session()->flash('edit', 'تم تعديل الفاتورة بنجاح');
@@ -256,6 +275,12 @@ class InvoivicesController extends Controller
 
     public function Status_Update(Request $request)
     {
+
+
+
+
+
+
         $invoice = Invoivices::find($request->invoice_id);
         $detalis = invoices_detalis::where('id_Invoice', $request->invoice_id);
 
@@ -263,7 +288,11 @@ class InvoivicesController extends Controller
             $invoice->update([
                 'Status' => $request->Status,
                 'Value_Status' => 1,
-                'Payment_Date' => $request->Payment_Date
+                'Payment_Date' => $request->Payment_Date,
+                'Amount_collection' => 0
+
+
+
             ]);
             $detalis->create([
                 'id_Invoice' => $request->invoice_id,
@@ -275,12 +304,23 @@ class InvoivicesController extends Controller
                 'Payment_Date' => $request->Payment_Date,
                 'note' => $request->note,
                 'user' => (auth()->user()->name),
+                'total' => 0
             ]);
         } else {
+            $Paid_Amount = $request->Paid_Amount;
+            $mount = $request->Amount_collection;
+
+            if ($Paid_Amount == null) {
+                $Paid_Amount == 0;
+            }
+
+            $total = $mount - $Paid_Amount;
+
             $invoice->update([
                 'Status' => $request->Status,
                 'Value_Status' => 3,
-                'Payment_Date' => $request->Payment_Date
+                'Payment_Date' => $request->Payment_Date,
+                'Amount_collection' => $total,
             ]);
             $detalis->create([
                 'id_Invoice' => $request->invoice_id,
@@ -292,6 +332,7 @@ class InvoivicesController extends Controller
                 'Payment_Date' => $request->Payment_Date,
                 'note' => $request->note,
                 'user' => (auth()->user()->name),
+                'total' => $total
             ]);
         }
 
@@ -304,6 +345,8 @@ class InvoivicesController extends Controller
     {
         $status = 3;
         $status_view = "الفواتير المدفوعه جزئيا";
+
+
 
         if ($id == 1) {
             $status = 1;
@@ -329,6 +372,7 @@ class InvoivicesController extends Controller
 
     public function export()
     {
+
         return Excel::download(new InvoicesExport, 'Invoices.xlsx');
     }
 
@@ -337,7 +381,7 @@ class InvoivicesController extends Controller
         $not = auth()->user()->unreadNotifications;
 
         if ($not) {
-            $not->markAsRead();;
+            $not->markAsRead();
             return back();
         }
     }

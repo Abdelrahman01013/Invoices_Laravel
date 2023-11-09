@@ -160,6 +160,7 @@
                                                             <th>تاريخ الدفع </th>
                                                             <th>ملاحظات</th>
                                                             <th>تاريخ الاضافة </th>
+                                                            <th>قيمه الفاتوره </th>
                                                             <th>المستخدم</th>
                                                         </tr>
                                                     </thead>
@@ -188,6 +189,7 @@
                                                                 <td>{{ $x->Payment_Date }}</td>
                                                                 <td>{{ $x->note }}</td>
                                                                 <td>{{ $x->created_at }}</td>
+                                                                <td>{{ $x->total }}</td>
                                                                 <td>{{ $x->user }}</td>
                                                             </tr>
                                                         @endforeach

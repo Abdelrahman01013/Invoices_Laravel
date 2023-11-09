@@ -24,6 +24,7 @@ return new class extends Migration
             $table->integer('Value_Status');
             $table->date('Payment_Date')->nullable();
             $table->text('note')->nullable();
+            $table->integer('total');
             $table->string('user', 300);
 
             $table->timestamps();

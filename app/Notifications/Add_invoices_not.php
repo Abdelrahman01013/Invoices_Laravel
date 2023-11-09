@@ -17,9 +17,11 @@ class Add_invoices_not extends Notification
      * @return void
      */
     private $inv_id;
-    public function __construct($inv_id)
+    private $title;
+    public function __construct($inv_id, $title)
     {
         $this->inv_id = $inv_id;
+        $this->title = $title;
     }
 
     /**
@@ -51,7 +53,7 @@ class Add_invoices_not extends Notification
     {
         return [
             'inv_id' => $this->inv_id,
-            'title' => 'تم أضافه فاتوره بواسطه ',
+            'title' => $this->title,
             'user_create' => auth()->user()->name,
 
         ];

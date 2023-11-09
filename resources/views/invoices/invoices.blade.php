@@ -42,7 +42,7 @@
                 </div>
             </div>
             @can('تصدير EXCEL')
-                <a class="modal-effect btn btn-sm btn-primary" href="{{ url('export_invoices') }}" style="color:white"><i
+                <a class=" btn btn-sm btn-primary" href="{{ route('export_invoices') }}" style="color:white"><i
                         class="fas fa-file-download"></i>&nbsp;تصدير اكسيل</a>
             @endcan
         </div>
@@ -57,6 +57,15 @@
                 </button>
             </div>
         @endif
+        @if (session()->has('Add'))
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                <strong>{{ session()->get('Add') }}</strong>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        @endif
+
 
 
         @if (session()->has('delete_invoice'))
@@ -91,7 +100,7 @@
 
                     </div>
                     @can('اضافة فاتورة')
-                        <a class="btn btn-outline-primary" href="invoices/create"><b>اضافه فاتوره</a>
+                        <a class="btn btn-outline-primary" href="{{ route('invoices.create') }}"><b>اضافه فاتوره</a>
                     @endcan
 
 
@@ -107,10 +116,12 @@
                                         <th class="border-bottom-0">المنتج</th>
                                         <th class="border-bottom-0">القسم</th>
 
-                                        <th class="border-bottom-0">الخصم</th>
+                                        <th class="border-bottom-0">مبلغ التحصيل</th>
+                                        <th class="border-bottom-0">العموله</th>
+                                        <th class="border-bottom-0">الخصومات</th>
                                         <th class="border-bottom-0">نسبه الضريبه</th>
-                                        <th class="border-bottom-0">قيمه الضريبه</th>
-                                        <th class="border-bottom-0">الأجمالي </th>
+                                        {{-- <th class="border-bottom-0">قيمه الضريبه</th> --}}
+                                        <th class="border-bottom-0">اجمالي العموله</th>
                                         <th class="border-bottom-0">الحاله</th>
                                         <th class="border-bottom-0">ملاحظلات</th>
                                         <th class="border-bottom-0">العمليات</th>
@@ -135,10 +146,15 @@
                                                     {{ $inv->section->section_name }}
                                                 </a>
                                             </td>
+
+
+
                                             <td>{{ $inv->Amount_collection }}</td>
+                                            <td>{{ $inv->Amount_Commission }}</td>
                                             <td>{{ $inv->Discount }}</td>
-                                            <td>{{ $inv->Value_VAT }}</td>
+                                            <td>{{ $inv->Rate_VAT }} </td>
                                             <td>{{ $inv->Total }}</td>
+
                                             <td>
                                                 @if ($inv->Value_Status == 2)
                                                     <p class="text-danger">{{ $inv->Status }} </p>
@@ -148,7 +164,11 @@
                                                     <p class="text-warning">{{ $inv->Status }} </p>
                                                 @endif
                                             </td>
+
                                             <td>{{ $inv->note }}</td>
+
+
+
 
                                             <td>
                                                 <div class="dropdown">

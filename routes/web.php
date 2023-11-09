@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ArchiveController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\ImgController;
 use App\Http\Controllers\InvoicesAttachmentController;
 use App\Http\Controllers\InvoicesDetalisController;
 use App\Http\Controllers\InvoivicesController;
@@ -22,6 +23,7 @@ use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Invoices_ReportController;
 use App\Http\Controllers\RoleController;
 
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -37,24 +39,28 @@ Route::get('/', function () {
     return view('auth.login');
 });
 
-// Route::get('/dashboard', function () {
-//     return view('dashboard');
-// });
+Route::fallback(function () {
+    return view('404');
+});
 
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::resource('dashboard', HomeController::class)->middleware(['auth', 'verified']);
-
-
-
-require __DIR__ . '/auth.php';
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+});
 
-    // Our resource routes
+require __DIR__ . '/auth.php';
+
+
+Route::middleware(['auth', 'verified'])->group(function () {
+    Route::resource('home', HomeController::class);
+
+    // الصلاحيات
     Route::resource('roles', RoleController::class);
-    // ->middleware('permission:عرض صلاحية', ['only' => ['index']]);;
     Route::resource('users', UserController::class);
 
 
@@ -63,15 +69,11 @@ Route::middleware('auth')->group(function () {
     Route::resource('products', ProductController::class);
 
 
-
     Route::get('invouce_report', [Invoices_ReportController::class, 'index']);
     Route::get('/Search_invoices', [Invoices_ReportController::class, 'Search_invoices'])->name('Search_invoices');
 
     Route::get('/customer_search', [Invoices_ReportController::class, 'customer_search'])->name('customer_search');
     Route::get('/Customer', [Invoices_ReportController::class, 'Customer'])->name('Customer');
-
-
-
     Route::post('/get-products-by-section', [InvoivicesController::class, 'getProductsBySection'])->name('getProductsBySection');
 
     Route::resource('detalis', InvoicesDetalisController::class);
@@ -86,23 +88,19 @@ Route::middleware('auth')->group(function () {
 
 
     Route::get('Status_show', [InvoivicesController::class, 'status'])->name('Status_show');
-
     Route::post('Status_Update', [InvoivicesController::class, 'Status_Update'])->name('Status_Update');
-
-
     Route::get('show_invoices_status/{id}', [InvoivicesController::class, 'show_invoices_status'])->name('show_invoices_status');
-
     Route::resource('Archive', ArchiveController::class);
-
     Route::get('Print_invoice/{id}', [InvoivicesController::class, 'Print_invoice']);
-
-    Route::get('export_invoices', [InvoivicesController::class, 'export']);
-
+    Route::get('export_invoices', [InvoivicesController::class, 'export'])->name('export_invoices');
     Route::get('read_all', [InvoivicesController::class, 'read_all'])->name('read_all');
+    Route::get('markAsRead/{v_id}/{n_id}', [InvoicesDetalisController::class, 'markAsRead']);
+    Route::get('delete_notifiction', [InvoicesDetalisController::class, 'delete_notifiction']);
+
+    Route::resource('add_img', ImgController::class);
 });
 
 
-
-// Route::get('test', function () {
-//     return  view('notification');
-// });
+Route::get('test', function () {
+    return view('icons');
+});

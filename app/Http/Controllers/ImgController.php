@@ -2,70 +2,19 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Invoivices;
+use App\Models\User;
 use Illuminate\Http\Request;
 
-class HomeController extends Controller
+class ImgController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    function __construct()
-    {
-        $this->middleware('auth');
-    }
-
     public function index()
     {
-        $count = Invoivices::count();
-        $count_v1 = Invoivices::where('Value_Status', 1)->count();
-        $count_v2 = Invoivices::where('Value_Status', 2)->count();
-        $count_v3 = Invoivices::where('Value_Status', 3)->count();
-
-        if ($count != 0) {
-
-            $N1 = number_format($count_v1 / $count  * 100, 1);
-            $N2 = number_format($count_v2 / $count  * 100, 1);
-            $N3 = number_format($count_v3 / $count  * 100, 1);
-        } else {
-            $N1 = 0;
-            $N2 = 0;
-            $N3 = 0;
-        }
-
-
-
-
-
-
-
-
-        $chartjs = app()->chartjs
-            ->name('barChartTest')
-            ->type('bar')
-            ->size(['width' => 400, 'height' => 200])
-            ->labels(['الفواتير المدفوعه جزئيا', 'الفواتير المدفوعه', 'الفواتير الغير مدفوعه', 'احمالي الفواتير'])
-            ->datasets([
-                [
-                    "label" => "",
-                    'backgroundColor' => ['rgb(255, 163 , 60)', 'green', ' rgba(255, 99, 132, 0.9)', 'blue'],
-                    'data' =>  [$N3, $N1, $N2, 100]
-                ],
-
-            ])
-            ->options([]);
-
-
-
-
-
-
-
-
-
-        return view('home', compact('chartjs', 'N1', 'N2', 'N3'));
+        //
     }
 
     /**
@@ -86,7 +35,33 @@ class HomeController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'img' => 'mimes:png,jpg,jpeg,gif'
+        ], [
+            'img.mimes' => 'يجب ان تكون الصوره  png , Jpg , jpeg , gif'
+        ]);
+
+        if ($request->hasFile('img')) {
+            $file = $request->file('img');
+            $file_name = time() . '.' . $file->getClientOriginalExtension();
+            $file->move('assets/img/profile', $file_name);
+
+            $old_img_path = 'assets/img/profile/' . auth()->user()->img;
+            if (file_exists($old_img_path) && is_file($old_img_path)) {
+
+                unlink($old_img_path);
+            }
+
+
+
+            $user = User::find(auth()->user()->id);
+            $user->img = $file_name;
+            $user->save();
+
+            return back();
+        } else {
+            return back();;
+        }
     }
 
     /**

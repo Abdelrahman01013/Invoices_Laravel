@@ -25,19 +25,21 @@ class AuthenticatedSessionController extends Controller
      */
     public function store(LoginRequest $request): RedirectResponse
     {
-        $credetails = [
+        $create = [
             'email' => $request->email,
             'password' => $request->password,
             'Status' => 'مفعل'
         ];
-        if (Auth::attempt($credetails)) {
+        if (Auth::attempt($create)) {
+
             $request->authenticate();
 
             $request->session()->regenerate();
 
             return redirect()->intended(RouteServiceProvider::HOME);
         } else {
-            return back()->with('error', 'Error Email or Password');
+            $error = "هذا الاميل غير مفعل";
+            return back()->with($error);
         }
     }
 

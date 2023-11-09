@@ -134,7 +134,7 @@
                         </div><br>
 
                         <div class="row">
-                            <div class="col">
+                            <div class="col-4">
                                 <label for="exampleTextarea">حالة الدفع</label>
                                 <select class="form-control" id="Status" name="Status" required>
                                     <option selected="true" disabled="disabled">-- حدد حالة الدفع --</option>
@@ -143,10 +143,16 @@
                                 </select>
                             </div>
 
-                            <div class="col">
+                            <div class="col-4">
                                 <label>تاريخ الدفع</label>
                                 <input class="form-control fc-datepicker" name="Payment_Date" placeholder="YYYY-MM-DD"
                                     type="text" required value="{{ date('Y-m-d') }}">
+                            </div>
+
+                            <div class="col-4" id="paidAmountDiv">
+                                <label>المبلغ المدفوع</label>
+                                <input class="form-control" name="Paid_Amount" placeholder="المبلغ المدفوع"
+                                    type="number" value="0" required>
                             </div>
 
 
@@ -188,5 +194,16 @@
         var date = $('.fc-datepicker').datepicker({
             dateFormat: 'yy-mm-dd'
         }).val();
+
+        document.getElementById('Status').addEventListener('change', function() {
+            var status = this.value;
+            var paidAmountDiv = document.getElementById('paidAmountDiv');
+
+            if (status === 'مدفوعة جزئيا') {
+                paidAmountDiv.style.display = 'block';
+            } else {
+                paidAmountDiv.style.display = 'none';
+            }
+        });
     </script>
 @endsection
