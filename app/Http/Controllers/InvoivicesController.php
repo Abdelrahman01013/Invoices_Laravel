@@ -276,11 +276,6 @@ class InvoivicesController extends Controller
     public function Status_Update(Request $request)
     {
 
-
-
-
-
-
         $invoice = Invoivices::find($request->invoice_id);
         $detalis = invoices_detalis::where('id_Invoice', $request->invoice_id);
 
