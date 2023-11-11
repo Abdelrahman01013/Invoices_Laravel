@@ -158,7 +158,6 @@
 
 
                         {{-- </a> --}}
-                        <a class="dropdown-item" href=""><i class="bx bx-envelope"></i>الرسائل</a>
                         {{-- <a class="dropdown-item" href=""><i class="bx bx-slider-alt"></i> Account Settings</a> --}}
 
                         <a class="dropdown-item" href="{{ route('logout') }}"

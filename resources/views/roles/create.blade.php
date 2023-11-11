@@ -1,4 +1,7 @@
 @extends('layouts.master')
+@section('title')
+   اضافه صلاحيه -
+@stop
 
 @section('content')
     <div class="row">
