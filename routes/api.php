@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\api\apiAuthController;
 use App\Http\Controllers\api\ApiInvoicesController;
 use App\Http\Controllers\api\apiProductController;
 use App\Http\Controllers\api\ApiSectionController;
@@ -17,9 +18,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-// Route::middleware('auth:sanctum')->get('/user', function (Request {request) {
-//     return $request->user();
-// });
+Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
+    return $request->user();
+});
 
 
 // Route::middleware(['auth'.'verified'],)
@@ -42,8 +43,24 @@ Route::delete('section/{id}', [ApiSectionController::class, 'destroy']);
 
 
 // product
-Route::get('products', [apiProductController::class, 'index']);
+Route::any('products', [apiProductController::class, 'index']);
 Route::post('product', [apiProductController::class, 'store']);
 Route::get('product/{id}', [apiProductController::class, 'show']);
 Route::post('product/{id}', [apiProductController::class, 'update']);
 Route::delete('product/{id}', [apiProductController::class, 'destroy']);
+
+// Route::get('products', [apiProductController::class, 'index'])->middleware('auth.sanctum');
+
+
+// login/register
+
+Route::any('login', [apiAuthController::class, 'login']);
+Route::any('register', [apiAuthController::class, 'register']);
+
+Route::middleware('auth:sanctum')->group(function () {
+
+
+    Route::any('profile', [apiAuthController::class, 'profile']);
+    Route::post('update', [apiAuthController::class, 'update']);
+    Route::get('show_all', [apiAuthController::class, 'show_all']);
+});
