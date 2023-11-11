@@ -6,6 +6,7 @@ use App\Http\Controllers\Api\ApiTrait;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 
@@ -56,7 +57,7 @@ class apiAuthController extends Controller
             'email' => 'required|email|unique:users,email',
             'password' => 'required| between:5,100',
             'status' => 'required | in:مفعل,غيرمفعل',
-            'rolse_name' => 'required|exists:roles,name'
+            'roles_name' => 'required|exists:roles,name'
 
 
         ]);
@@ -70,9 +71,11 @@ class apiAuthController extends Controller
             'email' => $request->email,
             'password' => Hash::make($request->password),
             'Status' => $request->status,
-            'roles_name' => $request->rolse_name
+            'roles_name' => [$request->roles_name]
 
         ]);
+        $user->assignRole($request->input('roles_name'));
+
         if ($user) {
 
             $token = $user->createToken($user->name);
@@ -116,7 +119,10 @@ class apiAuthController extends Controller
             $user->password = Hash::make($request->password);
         }
         if ($request->has('roles_name')) {
-            $user->roles_name = $request->roles_name;
+            $user->roles_name = [$request->roles_name];
+
+            DB::table('model_has_roles')->where('model_id', $user->id)->delete();
+            $user->assignRole($request->input('roles_name'));
         }
         if ($request->has('status')) {
             $user->Status = $request->status;
@@ -134,5 +140,17 @@ class apiAuthController extends Controller
     {
         $users = User::all();
         return response(['users' => $users, 'message' => 'حميع المستخدمين']);
+    }
+
+    public function destory($id)
+    {
+        $user = User::find($id);
+
+        $file = "assets/img/profile/" . $user->img;
+        if (is_file($file)) {
+            unlink($file);
+        }
+        $user->destroy($id);
+        return response(['message' => 'تم حزف المستخدم', 200]);
     }
 }

@@ -9,6 +9,7 @@ use Spatie\Permission\Models\Role;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use PHPUnit\Framework\Constraint\FileExists;
 
 class UserController extends Controller
 {
@@ -79,7 +80,6 @@ class UserController extends Controller
         $user = User::find($id);
         $user->update($input);
         DB::table('model_has_roles')->where('model_id', $id)->delete();
-
         $user->assignRole($request->input('roles_name'));
 
         return redirect()->route('users.index')
@@ -90,6 +90,12 @@ class UserController extends Controller
     {
         $id = $request->user_id;
         $user = User::find($id);
+        $file = "assets/img/profile/" . $user->img;
+
+        // return $file;
+        if (is_file($file)) {
+            unlink($file);
+        }
         $user->destroy($id);
         return redirect()->route('users.index')
             ->with('success', 'User deleted successfully');

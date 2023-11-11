@@ -11,6 +11,15 @@ use Illuminate\Http\Request;
 
 class ArchiveController extends Controller
 {
+    // function __construct()
+    // {
+    //     $this->middleware('permission:ارشيف الفواتير', ['only' => ['index']]);
+    //     $this->middleware('permission:ارشفة الفاتورة', ['only' => ['create', 'store']]);
+    //     $this->middleware('permission:تعديل صلاحية', ['only' => ['edit', 'uPdate']]);
+    //     $this->middleware('permission:حذف صلاحية', ['only' => ['destroy']]);
+    // }
+
+
     /**
      * Display a listing of the resource.
      *

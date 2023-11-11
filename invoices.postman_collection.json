@@ -1,0 +1,912 @@
+{
+	"info": {
+		"_postman_id": "89057bbb-3f96-4005-8da3-d7c402039b0d",
+		"name": "invoices",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "25877726"
+	},
+	"item": [
+		{
+			"name": "invoice",
+			"item": [
+				{
+					"name": "all_invoices",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/apinvoices",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"apinvoices"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get_invoice_id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/apinvoice/3",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"apinvoice",
+								"3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create_invoices",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "invoice_number",
+									"value": "R1822",
+									"type": "text"
+								},
+								{
+									"key": "invoice_Date",
+									"value": "2023-11-08",
+									"type": "text"
+								},
+								{
+									"key": "Due_date",
+									"value": "2023-11-08",
+									"type": "text"
+								},
+								{
+									"key": "product",
+									"value": "دين بنك مصر",
+									"type": "text"
+								},
+								{
+									"key": "Section",
+									"value": "2",
+									"type": "text"
+								},
+								{
+									"key": "Amount_collection",
+									"value": "2000",
+									"type": "text"
+								},
+								{
+									"key": "Amount_Commission",
+									"value": "100",
+									"type": "text"
+								},
+								{
+									"key": "Discount",
+									"value": "30",
+									"type": "text"
+								},
+								{
+									"key": "Value_VAT",
+									"value": "2",
+									"type": "text"
+								},
+								{
+									"key": "Rate_VAT",
+									"value": "5%",
+									"type": "text"
+								},
+								{
+									"key": "Total",
+									"value": "80",
+									"type": "text"
+								},
+								{
+									"key": "note",
+									"value": "لا يوجد",
+									"type": "text"
+								},
+								{
+									"key": "pic",
+									"type": "file",
+									"src": "/D:/الفرقة الأولي1 نهائي.pdf"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/apinvoice",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"apinvoice"
+							],
+							"query": [
+								{
+									"key": "invoice_number",
+									"value": "api1200",
+									"disabled": true
+								},
+								{
+									"key": "invoice_Date",
+									"value": "2023-11-08",
+									"disabled": true
+								},
+								{
+									"key": "Due_date",
+									"value": "2023-11-08",
+									"disabled": true
+								},
+								{
+									"key": "product",
+									"value": "دين بنك مصر",
+									"disabled": true
+								},
+								{
+									"key": "section_id",
+									"value": "1",
+									"disabled": true
+								},
+								{
+									"key": "Amount_collection",
+									"value": "2000",
+									"disabled": true
+								},
+								{
+									"key": "Amount_Commission",
+									"value": "10",
+									"disabled": true
+								},
+								{
+									"key": "Discount",
+									"value": "2",
+									"disabled": true
+								},
+								{
+									"key": "Value_VAT",
+									"value": "5",
+									"disabled": true
+								},
+								{
+									"key": "Rate_VAT",
+									"value": "5%",
+									"disabled": true
+								},
+								{
+									"key": "Total",
+									"value": "20",
+									"disabled": true
+								},
+								{
+									"key": "note",
+									"value": " لايوجد",
+									"disabled": true
+								},
+								{
+									"key": "pic",
+									"value": "photo.png",
+									"disabled": true
+								},
+								{
+									"key": "Value_Status",
+									"value": "",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update_invoices",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "invoice_number",
+									"value": "R100",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "invoice_Date",
+									"value": "2023-11-08",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "Due_date",
+									"value": "2023-11-08",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "product",
+									"value": "دين البنك الاهلي",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "Section",
+									"value": "1",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "Amount_collection",
+									"value": "500",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "Amount_Commission",
+									"value": "50",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "Discount",
+									"value": "10",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "Value_VAT",
+									"value": "20",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "Rate_VAT",
+									"value": "5%",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "Total",
+									"value": "10",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "note",
+									"value": "ىخ",
+									"type": "text",
+									"disabled": true
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/apinvoice/2?invoice_number=R203&invoice_Date=2023-11-08&Due_date=2023-11-09&product=دين البنك الاهلي&Section=1&Amount_collection=200&Amount_Commission=100&Discount=20&Value_VAT=10&Rate_VAT=30&Total=200&note=fff",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"apinvoice",
+								"2"
+							],
+							"query": [
+								{
+									"key": "invoice_number",
+									"value": "R203"
+								},
+								{
+									"key": "invoice_Date",
+									"value": "2023-11-08"
+								},
+								{
+									"key": "Due_date",
+									"value": "2023-11-09"
+								},
+								{
+									"key": "product",
+									"value": "دين البنك الاهلي"
+								},
+								{
+									"key": "Section",
+									"value": "1"
+								},
+								{
+									"key": "Amount_collection",
+									"value": "200"
+								},
+								{
+									"key": "Amount_Commission",
+									"value": "100"
+								},
+								{
+									"key": "Discount",
+									"value": "20"
+								},
+								{
+									"key": "Value_VAT",
+									"value": "10"
+								},
+								{
+									"key": "Rate_VAT",
+									"value": "30"
+								},
+								{
+									"key": "Total",
+									"value": "200"
+								},
+								{
+									"key": "note",
+									"value": "fff"
+								},
+								{
+									"key": "invoice_id",
+									"value": "2",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete_invoices",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/apinvoice/5",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"apinvoice",
+								"5"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "archive",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/archive/4",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"archive",
+								"4"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "section",
+			"item": [
+				{
+					"name": "add_section",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "6|bIRmkpXOTEQBZaji8ocpXYI5anPHpWDUyHej8WS6ad846221",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "section_name",
+									"value": "بنك5",
+									"type": "text"
+								},
+								{
+									"key": "description",
+									"value": "api ",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/sections",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"sections"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "all_sections",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/sections",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"sections"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "show_id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/section/50",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"section",
+								"50"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update_section",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/section/1?section_name=بنك الاسكندريه&description=api_elex",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"section",
+								"1"
+							],
+							"query": [
+								{
+									"key": "section_name",
+									"value": "بنك الاسكندريه"
+								},
+								{
+									"key": "description",
+									"value": "api_elex"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete_section",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/section/3",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"section",
+								"3"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "products",
+			"item": [
+				{
+					"name": "all_products",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/products",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"products"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "show_id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/product/2",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"product",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create_product",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "product_name",
+									"value": "bank Apis",
+									"type": "text"
+								},
+								{
+									"key": "section_id",
+									"value": "2",
+									"type": "text"
+								},
+								{
+									"key": "description",
+									"value": "this is new api",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/product",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"product"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update_product",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/product/4?product_name=ديون بنك مصر&description=ملوي&section_id=2",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"product",
+								"4"
+							],
+							"query": [
+								{
+									"key": "product_name",
+									"value": "ديون بنك مصر"
+								},
+								{
+									"key": "description",
+									"value": "ملوي"
+								},
+								{
+									"key": "section_id",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete_product",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/product/4",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"product",
+								"4"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "auth",
+			"item": [
+				{
+					"name": "login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/login?email=generalal700@gmail.com&password=123456789",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"login"
+							],
+							"query": [
+								{
+									"key": "email",
+									"value": "generalal700@gmail.com"
+								},
+								{
+									"key": "password",
+									"value": "123456789"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "register",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "name",
+									"value": "Ali",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "email",
+									"value": "ali@gmail.com",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "password",
+									"value": "123456",
+									"type": "text",
+									"disabled": true
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/register?name=Abdelrahman&email=test@gmail.com&password=123456789&status=مفعل&roles_name=owner",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"register"
+							],
+							"query": [
+								{
+									"key": "name",
+									"value": "Abdelrahman"
+								},
+								{
+									"key": "email",
+									"value": "test@gmail.com"
+								},
+								{
+									"key": "password",
+									"value": "123456789"
+								},
+								{
+									"key": "status",
+									"value": "مفعل"
+								},
+								{
+									"key": "roles_name",
+									"value": "owner"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "profile",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "1|jgXLcQtsAXq5K0Z48XCtepgqZ4AxCnOzRQQu1ekC82185315",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/profile",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"profile"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "4|lLLfY0veODngUyAxSZkdoEDpT6NdlMmi5cxZSrBVd72a6f64",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/update",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"update"
+							],
+							"query": [
+								{
+									"key": "name",
+									"value": "yassen",
+									"disabled": true
+								},
+								{
+									"key": "email",
+									"value": "syaseen@gmail.com",
+									"disabled": true
+								},
+								{
+									"key": "password",
+									"value": "243255",
+									"disabled": true
+								},
+								{
+									"key": "roles_name",
+									"value": "admin",
+									"disabled": true
+								},
+								{
+									"key": "status",
+									"value": "مفعل",
+									"disabled": true
+								},
+								{
+									"key": "img",
+									"value": "abdo.png",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "destroy",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "6|bIRmkpXOTEQBZaji8ocpXYI5anPHpWDUyHej8WS6ad846221",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/destory/7",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"destory",
+								"7"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "show_all",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "6|bIRmkpXOTEQBZaji8ocpXYI5anPHpWDUyHej8WS6ad846221",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/show_all",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"show_all"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "url",
+			"value": "http://127.0.0.1:8000/api",
+			"type": "string"
+		}
+	]
+}
